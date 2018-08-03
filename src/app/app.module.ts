@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http'; 
 import { NgModule, ErrorHandler } from '@angular/core';
 
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
@@ -25,10 +26,16 @@ import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
 import { TabsPage } from '../pages/tabs-page/tabs-page';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SupportPage } from '../pages/support/support';
+import { BookServicePage } from '../pages/book-service/book-service';
+import { BikesModalPage } from '../pages/bikes-modal/bikes-modal';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
+import { BikeDataProvider } from '../providers/bike-data/bike-data';
+import { BikeServiceDataProvider } from '../providers/bike-service-data/bike-service-data';
 
+
+import { BookingService } from '../models/booking-service-model';
 
 @NgModule({
   declarations: [
@@ -46,11 +53,14 @@ import { UserData } from '../providers/user-data';
     SpeakerListPage,
     TabsPage,
     TutorialPage,
-    SupportPage
+    SupportPage,
+    BookServicePage,
+    BikesModalPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
+    HttpClientModule,
     IonicModule.forRoot(ConferenceApp, {}, {
       links: [
         { component: TabsPage, name: 'TabsPage', segment: 'tabs-page' },
@@ -65,7 +75,8 @@ import { UserData } from '../providers/user-data';
         { component: SupportPage, name: 'SupportPage', segment: 'support' },
         { component: LoginPage, name: 'LoginPage', segment: 'login' },
         { component: AccountPage, name: 'AccountPage', segment: 'account' },
-        { component: SignupPage, name: 'SignupPage', segment: 'signup' }
+        { component: SignupPage, name: 'SignupPage', segment: 'signup' },
+        { component: BookServicePage, name: 'BookServicePage', segment: 'bookService' },
       ]
     }),
     IonicStorageModule.forRoot()
@@ -86,14 +97,21 @@ import { UserData } from '../providers/user-data';
     SpeakerListPage,
     TabsPage,
     TutorialPage,
-    SupportPage
+    SupportPage,
+    BookServicePage,
+    BikesModalPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     ConferenceData,
     UserData,
     InAppBrowser,
-    SplashScreen
+    SplashScreen,
+    BikeDataProvider,
+    HttpModule,
+    HttpClientModule,
+    BikeServiceDataProvider,
+    BookingService
   ]
 })
 export class AppModule { }
