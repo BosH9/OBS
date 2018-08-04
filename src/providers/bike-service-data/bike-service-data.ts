@@ -25,7 +25,7 @@ export class BikeServiceDataProvider {
  }
 
  getBookings(userId){
-  return this.http.get('http://localhost:57203/api/GetBOOKINGSERVICEByUserId',userId)
+  return this.http.get('http://localhost:57203/api/GetBOOKINGSERVICEByUserId/'+userId)
   .map(res=>res);
  }
 }

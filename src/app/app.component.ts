@@ -16,6 +16,7 @@ import { SchedulePage } from '../pages/schedule/schedule';
 import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
 import { SupportPage } from '../pages/support/support';
 import { BookServicePage } from '../pages/book-service/book-service';
+import { BookingsPage } from '../pages/bookings/bookings';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
@@ -48,7 +49,8 @@ export class ConferenceApp {
     { title: 'Speakers', name: 'TabsPage', component: TabsPage, tabComponent: SpeakerListPage, index: 1, icon: 'contacts' },
     { title: 'Map', name: 'TabsPage', component: TabsPage, tabComponent: MapPage, index: 2, icon: 'map' },
     //{ title: 'About', name: 'TabsPage', component: TabsPage, tabComponent: AboutPage, index: 3, icon: 'information-circle' },
-    { title: 'Book Service', name: 'TabsPage', component: BookServicePage, tabComponent: BookServicePage, index: 4, icon: 'calendar' }
+    { title: 'Book Service', name: 'TabsPage', component: BookServicePage, tabComponent: BookServicePage, index: 4, icon: 'calendar' },
+    { title: 'Books', name: 'TabsPage', component: BookingsPage, tabComponent: BookingsPage, index: 5, icon: 'calendar' }
   ];
   loggedInPages: PageInterface[] = [
     { title: 'Account', name: 'AccountPage', component: AccountPage, icon: 'person' },

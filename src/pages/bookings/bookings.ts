@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { BikeServiceDataProvider } from '../../providers/bike-service-data/bike-service-data';
-
+import { BookingDetailsPage } from '../booking-details/booking-details';
 /**
  * Generated class for the BookingsPage page.
  *
@@ -29,5 +29,12 @@ ionViewWillEnter(){
     this.bOOKINGSERVICE.getBookings(1).subscribe(res=>{
       this.bookings=res;
     });
+  }
+
+  goToBookingDetail(bookingServiceId: number) {
+    this.navCtrl.push(BookingDetailsPage,{BookingServiceId:bookingServiceId});
+  }
+  getInvoice(){
+    
   }
 }

@@ -43,7 +43,9 @@ $colors: (
   twitter:    #1da1f4,
   google:     #dc4a38,
   vimeo:      #23b6ea,
-  facebook:   #3b5998
+  facebook:   #3b5998,
+  progress-status:#396,
+
 );
 
 
@@ -78,8 +80,23 @@ $toolbar-md-active-color:                 #fff;
 // default are overridden.
 
 @import "ionic.theme.default";
-
-
+.status-circle{
+  height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 3px;
+    margin-left: 10px;
+    
+}
+.status-circle.progress{
+  background: #2fcc66;
+  box-shadow: 0px 0px 5px 1px #7EDE96;
+}
+.status-circle.problem{
+  background: #f1c40f;
+    box-shadow: 0px 0px 5px 1px #f1c40f;
+}
 // Ionicons
 // --------------------------------------------------
 // The premium icon font for Ionic. For more info, please see:

@@ -5,19 +5,83 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
     <ion-title>Bookings</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
-  <ion-card *ngFor="let bike of bikesList" (click)="selectBike(bike)">
-    <ion-card-content>
-      {{bike.BIKENUMBER}}
-    </ion-card-content>
-  
-  </ion-card>
+
+    <ion-item class="no-bookings" *ngIf="(bookings?.PastBookingsList?.length==0)&&(bookings?.RecentBookingsList?.length==0)">
+        <ion-avatar item-start>
+          <img src="assets/user-bike-img/motor-bike-svg-icon.svg">
+        </ion-avatar>
+        <h2 class="bike-number">NO BOOKINGS FOUND</h2>
+      </ion-item>
+
+
+    <ion-list *ngIf="bookings?.RecentBookingsList?.length>0">
+        <ion-item-divider sticky>
+            <ion-label>
+                Recent Bookings
+            </ion-label>
+          </ion-item-divider>  
+      
+
+    <ion-card *ngFor="let booking of bookings?.RecentBookingsList" (click)="goToBookingDetail(booking.ID)">
+    
+        <ion-item>
+            <ion-avatar item-start>
+              <img src="assets/user-bike-img/motor-bike-svg-icon.svg">
+            </ion-avatar>
+            <h2 class="bike-number">{{booking?.Bike?.BIKENUMBER}}</h2>
+          </ion-item>
+      
+      <ion-row>
+           <ion-col>
+              <ion-note color="progress-status">
+                  <div class="status-circle progress"></div> {{booking?.SERVICESTATUS}}
+                </ion-note>
+          </ion-col>
+          <ion-col center text-right class="pr-2">
+            <ion-note>
+              {{booking?.PICKUPTIME }}
+            </ion-note>
+          </ion-col>
+        </ion-row>
+    </ion-card>
+    </ion-list>
+
+    <ion-list *ngIf="bookings?.PastBookingsList?.length>0">
+        <ion-item-divider sticky>
+            <ion-label>
+                Past Bookings
+            </ion-label>
+          </ion-item-divider>  
+      
+
+    <ion-card *ngFor="let booking of bookings?.PastBookingsList" (click)="goToBookingDetail(booking.ID)">
+    
+        <ion-item>
+            <ion-avatar item-start>
+              <img src="assets/user-bike-img/motor-bike-svg-icon.svg">
+            </ion-avatar>
+            <h2 class="bike-number">{{booking?.Bike?.BIKENUMBER}}</h2>
+          </ion-item>
+      
+      <ion-row>
+           <ion-col>
+              <ion-note color="progress-status">
+                  <div class="status-circle progress"></div> {{booking?.SERVICESTATUS}}
+                </ion-note>
+          </ion-col>
+          <ion-col center text-right class="pr-2">
+            <ion-note>
+              {{booking?.DELIVEREDON | date}}
+            </ion-note>
+          </ion-col>
+        </ion-row>
+    </ion-card>
+    </ion-list>
 </ion-content>

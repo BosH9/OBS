@@ -28,6 +28,8 @@ import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SupportPage } from '../pages/support/support';
 import { BookServicePage } from '../pages/book-service/book-service';
 import { BikesModalPage } from '../pages/bikes-modal/bikes-modal';
+import { BookingsPage } from '../pages/bookings/bookings';
+import { BookingDetailsPage } from '../pages/booking-details/booking-details';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
@@ -55,7 +57,9 @@ import { BookingService } from '../models/booking-service-model';
     TutorialPage,
     SupportPage,
     BookServicePage,
-    BikesModalPage
+    BikesModalPage,
+    BookingsPage,
+    BookingDetailsPage
   ],
   imports: [
     BrowserModule,
@@ -77,6 +81,7 @@ import { BookingService } from '../models/booking-service-model';
         { component: AccountPage, name: 'AccountPage', segment: 'account' },
         { component: SignupPage, name: 'SignupPage', segment: 'signup' },
         { component: BookServicePage, name: 'BookServicePage', segment: 'bookService' },
+        { component: BookingsPage, name: 'BookingsPage', segment: 'bookings' },
       ]
     }),
     IonicStorageModule.forRoot()
@@ -99,7 +104,9 @@ import { BookingService } from '../models/booking-service-model';
     TutorialPage,
     SupportPage,
     BookServicePage,
-    BikesModalPage
+    BikesModalPage,
+    BookingsPage,
+    BookingDetailsPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
