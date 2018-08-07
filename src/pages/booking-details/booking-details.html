@@ -7,12 +7,98 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>booking-details</ion-title>
+      
   </ion-navbar>
-
+  <!-- <ion-toolbar color="primary" style="min-height:100px;">
+        <ion-title class="bike-title">AP 24 L 2068</ion-title><br>
+    
+    </ion-toolbar> -->
 </ion-header>
 
 
-<ion-content padding>
+<ion-content >
+  <ion-row style="background-color:#488aff;color:#fff;" *ngIf="booking">
+    <ion-col padding>
+        <h1>{{booking?.BIKE?.BIKENUMBER}}</h1>
+        <h2>{{booking?.ORDERS[0]?.TOTAL| currency:'₹ '}}</h2>
+        <h3 *ngIf="booking?.ORDERS[0]?.PAID=='Y'" class="paid-on">Paid on: {{booking?.ORDERS[0]?.PAIDON | date:'MMM d, y, h:mm a'}}</h3>
+        <h3 *ngIf="booking?.ORDERS[0]?.PAID!='Y'" class="paid-on">Booked on: {{booking?.PICKUPTIME | date:'MMM d, y, h:mm a'}}</h3>
+    </ion-col>
+  </ion-row>
+<ion-row text-center *ngIf="booking?.ORDERS[0]?.PAID!='Y' && booking?.SERVICESTATUS=='delivered'">
+  <ion-col>
+      <button ion-button round>PAY NOW</button>
+  </ion-col>
+</ion-row>
+
+<div padding *ngIf="booking?.SERVICESTATUS!='delivered'">
+  STATUS: <span class="booking-status">{{booking?.SERVICESTATUS}}</span>
+</div>
+  <div no-padding *ngIf="booking?.SERVICESTATUS=='delivered'">
+      <ion-segment [(ngModel)]="order" color="primary">
+          <ion-segment-button value="details">
+            Details
+          </ion-segment-button>
+          <ion-segment-button value="comments">
+            Comments
+          </ion-segment-button>
+          <ion-segment-button value="photos">
+            Photo's
+          </ion-segment-button>
+        </ion-segment>
+  </div>
+    
+    <div [ngSwitch]="order" *ngIf="booking?.SERVICESTATUS=='delivered'">
+  <ion-list *ngSwitchCase="'details'">
+    <ion-item>
+      <ion-row *ngFor="let orderDetails of booking?.ORDERS[0]?.ORDERDETAILS">
+        <ion-col col-5 text-left text-wrap class="quantity-price">
+          {{orderDetails.PART?.PARTNAME}}
+        </ion-col>
+        <ion-col col-4 text-right class="quantity-price">
+          {{orderDetails.QUANTITY}} X {{orderDetails.PART?.PRICE | currency:'₹ '}}
+        </ion-col>
+        <ion-col col-3 text-right>
+          {{orderDetails.AMOUNT | currency:'₹ '}}
+        </ion-col>
+      </ion-row>
+      <ion-row padding-top>
+        <ion-col col-6 class="sub-total-text">
+          Sub total
+        </ion-col>
+        <ion-col col-6 text-right>
+          {{booking?.ORDERS[0]?.AMOUNT | currency:'₹ '}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6 class="discount-text">
+          Discount
+        </ion-col>
+        <ion-col col-6 text-right>
+          {{booking?.ORDERS[0]?.DISCOUNT | currency:'₹ '}}
+        </ion-col>
+      </ion-row>
+      <ion-row text-bold padding-top>
+        <ion-col col-6 class="total-text">
+          TOTAL
+        </ion-col>
+        <ion-col col-6 text-right class="total-currency">
+          {{booking?.ORDERS[0]?.TOTAL | currency:'₹ '}}
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngSwitchCase="'comments'">
+    <ion-item>
+      No comments found
+    </ion-item>
+  </ion-list>
+  <ion-list *ngSwitchCase="'photos'">
+      <ion-item>
+        No photo's found
+      </ion-item>
+    </ion-list>
+</div>
 
 </ion-content>

@@ -129,7 +129,7 @@ this.bikeService.bookService(this.service).subscribe(res=>{
   console.log('Booked successfully',res);
   const toast = this.toastCtrl.create({
     message: 'Booking success, We will pickup your bike on specified time',
-    duration: 2000,
+    duration: 3000,
     position:'top'
   });
   toast.present();

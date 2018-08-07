@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class BikeServiceDataProvider {
-
+  apiAddress:string='http://localhost:57203/api/';
   constructor(public http: HttpClient) {
     console.log('Hello BikeServiceDataProvider Provider');
   }
@@ -20,12 +20,20 @@ export class BikeServiceDataProvider {
       'Accept': 'text/javascript'
     });
     let bikeob=JSON.stringify(bike);
-   return this.http.post('http://localhost:57203/api/BOOKINGSERVICEs',bikeob,{headers})
+   return this.http.post(this.apiAddress+'BOOKINGSERVICEs',bikeob,{headers})
        .map(res=>res);
  }
 
  getBookings(userId){
-  return this.http.get('http://localhost:57203/api/GetBOOKINGSERVICEByUserId/'+userId)
+  return this.http.get(this.apiAddress+'GetBOOKINGSERVICEByUserId/'+userId)
   .map(res=>res);
  }
+ getBookingDetails(id){
+  return this.http.get(this.apiAddress+'GetORDERByServiceId/'+id)
+  .map(res=>res);
+ }
+ getBookingServiceById(id){
+  return this.http.get(this.apiAddress+'BOOKINGSERVICEs/'+id).map(res=>res);
+ }
+
 }

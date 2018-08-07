@@ -97,6 +97,21 @@ $toolbar-md-active-color:                 #fff;
   background: #f1c40f;
     box-shadow: 0px 0px 5px 1px #f1c40f;
 }
+
+.sub-total-text, .discount-text{
+  font-weight: bold;
+  color: #ccc;
+}
+.sub-total-currency{
+  font-weight: bold;
+  color: #ccc;
+}
+.total-text{
+  font-weight: bold;
+}
+.total-currency{
+  font-weight: bold;
+}
 // Ionicons
 // --------------------------------------------------
 // The premium icon font for Ionic. For more info, please see:

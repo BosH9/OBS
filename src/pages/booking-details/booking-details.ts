@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { BikeServiceDataProvider } from '../../providers/bike-service-data/bike-service-data';
 
 /**
  * Generated class for the BookingDetailsPage page.
@@ -14,10 +15,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'booking-details.html',
 })
 export class BookingDetailsPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  order:string='details';
+  bookingServiceId:number=0;
+  booking:any;
+  constructor(public navCtrl: NavController, public navParams: NavParams,public bikeService:BikeServiceDataProvider) {
+    
   }
-
+  
+ionViewWillEnter(){
+  this.bookingServiceId=this.navParams.get('BookingServiceId');
+    this.bikeService.getBookingServiceById(this.bookingServiceId).subscribe(x=>{
+      this.booking=x;
+      console.log(this.booking);
+    });
+}
   ionViewDidLoad() {
     console.log('ionViewDidLoad BookingDetailsPage');
   }

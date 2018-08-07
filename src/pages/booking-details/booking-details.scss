@@ -1,3 +1,18 @@
 page-booking-details {
-
+    .bike-title{
+        font-size: 25px;
+    }
+    .paid-on{
+        font-size: 13px;
+    }
+    .quantity-price{
+        font-size: 13px;
+    }
+    .booking-status{
+        font-weight: bold;
+        color:color($colors, progress-status) !important;
+    }
+    
 }
+$segment-button-md-text-color-activated:color($colors, primary) !important;
+    $segment-button-md-border-bottom-color:color($colors, primary) !important;
