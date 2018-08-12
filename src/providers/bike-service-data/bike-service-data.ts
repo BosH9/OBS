@@ -9,7 +9,8 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class BikeServiceDataProvider {
-  apiAddress:string='http://localhost:57203/api/';
+  //apiAddress:string='http://127.0.0.1:55555/api/';
+  apiAddress:string='http://obstest-001-site1.itempurl.com/api/';
   constructor(public http: HttpClient) {
     console.log('Hello BikeServiceDataProvider Provider');
   }

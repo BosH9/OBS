@@ -10,6 +10,8 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class BikeDataProvider {
   data:any;
+  //apiAddress:string='http://127.0.0.1:55555/api/';
+  apiAddress:string='http://obstest-001-site1.itempurl.com/api/';
   constructor(public http: HttpClient) {
     console.log('Hello BikeDataProvider Provider');
   }
@@ -19,7 +21,7 @@ export class BikeDataProvider {
     .set('content-type','application/json')
     .set('Accept','application/json')
     .set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
-    return this.http.get('http://localhost:57203/api/Bikes',{params})
+    return this.http.get(this.apiAddress+'Bikes',{params})
         .map(res=>res);
   }
   processData(data: any) {
