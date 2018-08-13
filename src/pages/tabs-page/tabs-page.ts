@@ -8,6 +8,8 @@ import { SchedulePage } from '../schedule/schedule';
 import { SpeakerListPage } from '../speaker-list/speaker-list';
 import { BookServicePage } from '../book-service/book-service';
 import { BookingsPage } from '../bookings/bookings';
+import { LocationPickPage } from '../location-pick/location-pick';
+
 @Component({
   templateUrl: 'tabs-page.html'
 })
@@ -18,6 +20,7 @@ export class TabsPage {
   tab3Root: any = MapPage;
   tab4Root: any = BookServicePage;
   tab5Root: any = BookingsPage;
+  tab6Root: any = LocationPickPage;
   mySelectedIndex: number;
 
   constructor(navParams: NavParams) {
