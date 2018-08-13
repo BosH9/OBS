@@ -5,6 +5,7 @@ import { IonicPage, NavController, NavParams,Platform,
 import { BikeDataProvider } from '../../providers/bike-data/bike-data';
 import { BikeServiceDataProvider } from '../../providers/bike-service-data/bike-service-data';
 import { BikesModalPage } from '../bikes-modal/bikes-modal';
+import { LocationPickPage } from '../location-pick/location-pick';
 import { BookingService } from '../../models/booking-service-model';
 
 /**
@@ -24,6 +25,7 @@ export class BookServicePage {
   bikesList:any;
   myDate:any;
   bookingService:BookingService;
+  location:string='';
   constructor(public navCtrl: NavController, public navParams: NavParams,public platform: Platform,
     public actionsheetCtrl: ActionSheetController,public alertCtrl: AlertController,
     public bikeData:BikeDataProvider,public bikeService:BikeServiceDataProvider,
@@ -91,6 +93,16 @@ export class BookServicePage {
     bikeModal.onDidDismiss((data) => {
       console.log(data);
       this.bike=data;
+    });
+  }
+  
+  selectLocation(){
+    const locationModal = this.modalCtrl.create(LocationPickPage);
+    locationModal.present();
+
+    locationModal.onDidDismiss((data) => {
+      console.log(data);
+      this.location=data;
     });
   }
   ionViewDidLoad() {

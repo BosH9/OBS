@@ -20,9 +20,11 @@
 
 <ion-content padding>
   <ion-card *ngFor="let bike of bikesList" (click)="selectBike(bike)">
-    <ion-card-content>
-      {{bike.BIKENUMBER}}
-    </ion-card-content>
-  
+    <ion-item>
+        <ion-avatar item-start>
+            <img src="assets/user-bike-img/motor-bike-svg-icon.svg">
+          </ion-avatar>
+          <h2 class="bike-number">{{bike.BIKENUMBER}}</h2>
+    </ion-item>
   </ion-card>
 </ion-content>

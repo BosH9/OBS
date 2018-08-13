@@ -21,6 +21,10 @@
     <ion-label>Date</ion-label>
     <ion-datetime displayFormat="MM/DD/YYYY HH:mm" [(ngModel)]="myDate"></ion-datetime>
   </ion-item>
+  <ion-item (click)="selectLocation()">
+      <ion-label>Location</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
 </ion-content>
 <ion-footer text-center>
   <ion-toolbar>

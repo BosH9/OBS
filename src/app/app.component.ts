@@ -8,7 +8,7 @@ import { Storage } from '@ionic/storage';
 //import { AboutPage } from '../pages/about/about';
 import { AccountPage } from '../pages/account/account';
 import { LoginPage } from '../pages/login/login';
-import { MapPage } from '../pages/map/map';
+//import { MapPage } from '../pages/map/map';
 import { SignupPage } from '../pages/signup/signup';
 import { TabsPage } from '../pages/tabs-page/tabs-page';
 import { TutorialPage } from '../pages/tutorial/tutorial';
@@ -48,10 +48,9 @@ export class ConferenceApp {
   appPages: PageInterface[] = [
     { title: 'Schedule', name: 'TabsPage', component: TabsPage, tabComponent: SchedulePage, index: 0, icon: 'calendar' },
     { title: 'Speakers', name: 'TabsPage', component: TabsPage, tabComponent: SpeakerListPage, index: 1, icon: 'contacts' },
-    { title: 'Map', name: 'TabsPage', component: TabsPage, tabComponent: MapPage, index: 2, icon: 'map' },
-    { title: 'Book Service', name: 'TabsPage', component: BookServicePage, tabComponent: BookServicePage, index: 4, icon: 'calendar' },
-    { title: 'Books', name: 'TabsPage', component: BookingsPage, tabComponent: BookingsPage, index: 5, icon: 'calendar' },
-    { title: 'Location', name: 'LocationPage', component: LocationPickPage, tabComponent: LocationPickPage, index: 6, icon: 'md-location' },
+    { title: 'Book Service', name: 'TabsPage', component: BookServicePage, tabComponent: BookServicePage, index: 2, icon: 'calendar' },
+    { title: 'Books', name: 'TabsPage', component: BookingsPage, tabComponent: BookingsPage, index: 3, icon: 'calendar' },
+    { title: 'Location', name: 'LocationPickPage', component: LocationPickPage, tabComponent: LocationPickPage, index: 4, icon: 'map' },
   ];
   loggedInPages: PageInterface[] = [
     { title: 'Account', name: 'AccountPage', component: AccountPage, icon: 'person' },

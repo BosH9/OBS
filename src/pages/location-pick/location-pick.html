@@ -6,11 +6,16 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>location-pick</ion-title>
-  </ion-navbar>
-
-</ion-header>
+    <ion-navbar>
+        <ion-buttons left>
+            <button ion-button icon-only (click)="viewCtrl.dismiss()" class="my-style-for-modal">
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+      <ion-title>Location</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
 
 
 <ion-content padding>
