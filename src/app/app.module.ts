@@ -31,6 +31,7 @@ import { BikesModalPage } from '../pages/bikes-modal/bikes-modal';
 import { BookingsPage } from '../pages/bookings/bookings';
 import { BookingDetailsPage } from '../pages/booking-details/booking-details';
 import { LocationPickPage } from '../pages/location-pick/location-pick';
+import { LocationPickModalPage } from '../pages/location-pick-modal/location-pick-modal';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
@@ -61,13 +62,14 @@ import { BookingService } from '../models/booking-service-model';
     BikesModalPage,
     BookingsPage,
     BookingDetailsPage,
-    LocationPickPage
+    LocationPickPage,
+    LocationPickModalPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
     HttpClientModule,
-    IonicModule.forRoot(ConferenceApp, {}, {
+    IonicModule.forRoot(ConferenceApp, {tabsHideOnSubPages: true,}, {
       links: [
         { component: TabsPage, name: 'TabsPage', segment: 'tabs-page' },
         { component: SchedulePage, name: 'Schedule', segment: 'schedule' },
@@ -84,7 +86,8 @@ import { BookingService } from '../models/booking-service-model';
         { component: SignupPage, name: 'SignupPage', segment: 'signup' },
         { component: BookServicePage, name: 'BookServicePage', segment: 'bookService' },
         { component: BookingsPage, name: 'BookingsPage', segment: 'bookings' },
-        { component: LocationPickPage, name: 'LocationPickPage', segment: 'locationPick' }
+        { component: LocationPickPage, name: 'LocationPickPage', segment: 'locationPick' },
+        { component: LocationPickModalPage, name: 'LocationPickModalPage', segment: 'locationPickModal' },
       ]
     }),
     IonicStorageModule.forRoot()
@@ -110,7 +113,8 @@ import { BookingService } from '../models/booking-service-model';
     BikesModalPage,
     BookingsPage,
     BookingDetailsPage,
-    LocationPickPage
+    LocationPickPage,
+    LocationPickModalPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
