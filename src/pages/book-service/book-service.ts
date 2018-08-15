@@ -5,7 +5,7 @@ import { App, IonicPage, NavController, NavParams,Platform,
 import { BikeDataProvider } from '../../providers/bike-data/bike-data';
 import { BikeServiceDataProvider } from '../../providers/bike-service-data/bike-service-data';
 import { BikesModalPage } from '../bikes-modal/bikes-modal';
-import { LocationPickModalPage } from '../location-pick-modal/location-pick-modal';
+import { LocationPickPage } from '../location-pick/location-pick';
 import { BookingService } from '../../models/booking-service-model';
 
 /**
@@ -53,7 +53,8 @@ export class BookServicePage {
   }
   
   selectLocation(){
-    this.navCtrl.push(LocationPickModalPage);
+    //this.navCtrl.push(LocationPickPage);
+    this.app.getRootNav().push(LocationPickPage);
     // const locationModal = this.modalCtrl.create(LocationPickModalPage);
     
     // locationModal.onDidDismiss((data) => {

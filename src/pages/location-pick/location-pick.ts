@@ -59,7 +59,8 @@ export class LocationPickPage {
       let marker:Marker=this.map.addMarkerSync({
         title:myLocation.latLng.lat+' - '+myLocation.latLng.lng,
         position:myLocation.latLng,
-        animation:'drop'
+        animation:'drop',
+        draggable:true 
       });
           marker.showInfoWindow();
       
