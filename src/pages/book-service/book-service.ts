@@ -5,7 +5,7 @@ import { App, IonicPage, NavController, NavParams,Platform,
 import { BikeDataProvider } from '../../providers/bike-data/bike-data';
 import { BikeServiceDataProvider } from '../../providers/bike-service-data/bike-service-data';
 import { BikesModalPage } from '../bikes-modal/bikes-modal';
-import { LocationPickPage } from '../location-pick/location-pick';
+import { LocationPickModalPage } from '../location-pick-modal/location-pick-modal';
 import { BookingService } from '../../models/booking-service-model';
 
 /**
@@ -26,8 +26,8 @@ export class BookServicePage {
   myDate:any;
   bookingService:BookingService;
   location:string='';
-  @ViewChild(Nav) nav: Nav;
 
+  @ViewChild(Nav) nav: Nav;
   constructor(public navCtrl: NavController, public navParams: NavParams,public platform: Platform,
     public actionsheetCtrl: ActionSheetController,public alertCtrl: AlertController,
     public bikeData:BikeDataProvider,public bikeService:BikeServiceDataProvider,
@@ -53,18 +53,16 @@ export class BookServicePage {
   }
   
   selectLocation(){
-    // const locationModal = this.modalCtrl.create(LocationPickPage);
-    // locationModal.present();
-
+    this.navCtrl.push(LocationPickModalPage);
+    // const locationModal = this.modalCtrl.create(LocationPickModalPage);
+    
     // locationModal.onDidDismiss((data) => {
     //   console.log(data);
     //   this.location=data;
+    //   this.Opacity = 1;
     // });
-    //this.navCtrl.push(LocationPickPage);
-    //this.app.getRootNavs()[0].setRoot(LocationPickPage);
-    this.app.getRootNav().push(LocationPickPage);
-
-    //this.nav.setRoot(LocationPickPage);
+    // this.Opacity = 0;
+    // locationModal.present();
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad BookServicePage');
