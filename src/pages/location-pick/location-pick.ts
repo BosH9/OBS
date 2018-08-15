@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform,ModalController, ViewController  } from 'ionic-angular';
+import { App, IonicPage, NavController, NavParams, Platform,ModalController, ViewController  } from 'ionic-angular';
 import {
   LocationService,
   GoogleMaps,
   GoogleMap,
   GoogleMapOptions,
-  MyLocation
+  MyLocation,
+  Marker,
+  GoogleMapsEvent
 } from '@ionic-native/google-maps';
 
 /**
@@ -23,14 +25,23 @@ import {
 export class LocationPickPage {
   map: GoogleMap;
   constructor(public navCtrl: NavController, public navParams: NavParams,
-     private platform: Platform,public modalCtrl: ModalController,public viewCtrl: ViewController) {
-    
+     private platform: Platform,public modalCtrl: ModalController,public viewCtrl: ViewController,
+     public app: App) {
+      
   }
 
-  ionViewWillEnter(){
+  ionViewDidEnter(){
     this.platform.ready().then(()=>{
       this.loadMap();
     });
+  }
+  ionViewDidLoad() {
+    
+  }
+  ionViewWillUnload(){
+    console.log('ionViewWillUnload');
+    //this.app.getRootNavs()[0].setRoot(BookServicePage);
+    //this.app.getRootNav().setRoot(BookServicePage);
   }
 
   loadMap() {
@@ -38,12 +49,26 @@ export class LocationPickPage {
 
       let options: GoogleMapOptions = {
         camera: {
-          target: myLocation.latLng
+          target: myLocation.latLng,
+          zoom: 18,
+          tilt: 30
         }
       };
       this.map = GoogleMaps.create('map_canvas', options);
-
+      this.map.one(GoogleMapsEvent.MAP_READY).then(this.onMapReady.bind(this));
+      let marker:Marker=this.map.addMarkerSync({
+        title:myLocation.latLng.lat+' - '+myLocation.latLng.lng,
+        position:myLocation.latLng,
+        animation:'drop'
+      });
+          marker.showInfoWindow();
+      
     });
   }
-
+  onMapReady() {
+    console.log('map is ready!');
+  }
+  saveLocation(){
+    this.viewCtrl.dismiss();
+  }
 }

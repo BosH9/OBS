@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,Platform,
-   ActionSheetController,AlertController,ModalController, ToastController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { App, IonicPage, NavController, NavParams,Platform,
+   ActionSheetController,AlertController,ModalController, ToastController, Nav } from 'ionic-angular';
 
 import { BikeDataProvider } from '../../providers/bike-data/bike-data';
 import { BikeServiceDataProvider } from '../../providers/bike-service-data/bike-service-data';
@@ -26,11 +26,13 @@ export class BookServicePage {
   myDate:any;
   bookingService:BookingService;
   location:string='';
+  @ViewChild(Nav) nav: Nav;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,public platform: Platform,
     public actionsheetCtrl: ActionSheetController,public alertCtrl: AlertController,
     public bikeData:BikeDataProvider,public bikeService:BikeServiceDataProvider,
     public modalCtrl: ModalController,public bOOKINGSERVICE:BookingService,
-    public toastCtrl: ToastController) {
+    public toastCtrl: ToastController, public app: App) {
       
       this.getBikes();
   }
@@ -39,53 +41,7 @@ export class BookServicePage {
       this.bikesList = data;
     });
   }
-  openMenu() {
-    let actionSheet = this.actionsheetCtrl.create({
-      title: 'Albums',
-      cssClass: 'action-sheets-basic-page',
-      buttons: [
-        {
-          text: 'Delete',
-          role: 'destructive',
-          icon: !this.platform.is('ios') ? 'trash' : null,
-          handler: () => {
-            console.log('Delete clicked');
-          }
-        },
-        {
-          text: 'Share',
-          icon: !this.platform.is('ios') ? 'share' : null,
-          handler: () => {
-            console.log('Share clicked');
-          }
-        },
-        {
-          text: 'Play',
-          icon: !this.platform.is('ios') ? 'arrow-dropright-circle' : null,
-          handler: () => {
-            this.bike='SAMARAUI';
-            console.log('Play clicked');
-          }
-        },
-        {
-          text: 'Favorite',
-          icon: !this.platform.is('ios') ? 'heart-outline' : null,
-          handler: () => {
-            console.log('Favorite clicked');
-          }
-        },
-        {
-          text: 'Cancel',
-          role: 'cancel', // will always sort to be on the bottom
-          icon: !this.platform.is('ios') ? 'close' : null,
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }
-      ]
-    });
-    actionSheet.present();
-  }
+  
   openModal(){
     const bikeModal = this.modalCtrl.create(BikesModalPage);
     bikeModal.present();
@@ -97,13 +53,18 @@ export class BookServicePage {
   }
   
   selectLocation(){
-    const locationModal = this.modalCtrl.create(LocationPickPage);
-    locationModal.present();
+    // const locationModal = this.modalCtrl.create(LocationPickPage);
+    // locationModal.present();
 
-    locationModal.onDidDismiss((data) => {
-      console.log(data);
-      this.location=data;
-    });
+    // locationModal.onDidDismiss((data) => {
+    //   console.log(data);
+    //   this.location=data;
+    // });
+    //this.navCtrl.push(LocationPickPage);
+    //this.app.getRootNavs()[0].setRoot(LocationPickPage);
+    this.app.getRootNav().push(LocationPickPage);
+
+    //this.nav.setRoot(LocationPickPage);
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad BookServicePage');
