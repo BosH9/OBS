@@ -15,9 +15,13 @@
  
 <ion-content padding>
   <ion-item>
-    <ion-input type="text"></ion-input>
+    <ion-input type="text" [(ngModel)]="address" name="address"></ion-input> 
   </ion-item>
-  <div id="map_canvas"></div>
+  <!-- <div id="map_canvas"></div> -->
+  <div id="map_canvas" style="position: relative">
+      <!-- <img src="assets/icon/icons8-marker-26.png" style="position: absolute; left:50%;top:50%;" /> -->
+      <img src="assets/icon/Marker-40-80-120px/icons8-marker-40-red.png" style="position: absolute; left:50%;top:50%;margin-left: -20px;margin-top: -39px" />
+  </div>
 </ion-content>
 <ion-footer text-center>
     <ion-toolbar>
