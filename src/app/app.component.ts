@@ -49,7 +49,7 @@ export class ConferenceApp {
     { title: 'Schedule', name: 'TabsPage', component: TabsPage, tabComponent: SchedulePage, index: 0, icon: 'calendar' },
     { title: 'Speakers', name: 'TabsPage', component: TabsPage, tabComponent: SpeakerListPage, index: 1, icon: 'contacts' },
     { title: 'Book Service', name: 'TabsPage', component: BookServicePage, tabComponent: BookServicePage, index: 2, icon: 'calendar' },
-    { title: 'Books', name: 'TabsPage', component: BookingsPage, tabComponent: BookingsPage, index: 3, icon: 'calendar' },
+    { title: 'Bookings', name: 'TabsPage', component: BookingsPage, tabComponent: BookingsPage, index: 3, icon: 'calendar' },
     { title: 'Location', name: 'LocationPickPage', component: LocationPickPage, tabComponent: LocationPickPage, index: 4, icon: 'map' },
   ];
   loggedInPages: PageInterface[] = [

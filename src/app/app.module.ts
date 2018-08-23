@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http'; 
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule, ErrorHandler, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
@@ -33,6 +33,8 @@ import { BookingDetailsPage } from '../pages/booking-details/booking-details';
 import { LocationPickPage } from '../pages/location-pick/location-pick';
 import { LocationPickModalPage } from '../pages/location-pick-modal/location-pick-modal';
 
+import { GMapComponent } from '../components/g-map/g-map';
+
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 import { BikeDataProvider } from '../providers/bike-data/bike-data';
@@ -63,7 +65,8 @@ import { BookingService } from '../models/booking-service-model';
     BookingsPage,
     BookingDetailsPage,
     LocationPickPage,
-    LocationPickModalPage
+    LocationPickModalPage,
+    GMapComponent
   ],
   imports: [
     BrowserModule,
@@ -114,7 +117,8 @@ import { BookingService } from '../models/booking-service-model';
     BookingsPage,
     BookingDetailsPage,
     LocationPickPage,
-    LocationPickModalPage
+    LocationPickModalPage,
+    GMapComponent
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
@@ -127,6 +131,7 @@ import { BookingService } from '../models/booking-service-model';
     HttpClientModule,
     BikeServiceDataProvider,
     BookingService
-  ]
+  ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }

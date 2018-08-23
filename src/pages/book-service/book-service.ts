@@ -53,17 +53,9 @@ export class BookServicePage {
   }
   
   selectLocation(){
-    //this.navCtrl.push(LocationPickPage);
-    this.app.getRootNav().push(LocationPickPage);
-    // const locationModal = this.modalCtrl.create(LocationPickModalPage);
+    //this.app.getRootNav().push(LocationPickPage);
+    this.app.getRootNavs()[0].push(LocationPickPage);
     
-    // locationModal.onDidDismiss((data) => {
-    //   console.log(data);
-    //   this.location=data;
-    //   this.Opacity = 1;
-    // });
-    // this.Opacity = 0;
-    // locationModal.present();
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad BookServicePage');

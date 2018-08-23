@@ -1,5 +1,6 @@
 import { Component,NgZone } from '@angular/core';
-import { App, IonicPage, NavController, NavParams, Platform,ModalController, ViewController  } from 'ionic-angular';
+import { App, NavController, NavParams, Platform,ModalController, ViewController  } from 'ionic-angular';
+
 import {
   LocationService,
   GoogleMaps,
@@ -14,25 +15,24 @@ import {
   GeocoderResult
 } from '@ionic-native/google-maps';
 
-
-@IonicPage()
 @Component({
-  selector: 'page-location-pick',
-  templateUrl: 'location-pick.html',
+  selector: 'g-map',
+  templateUrl: 'g-map.html'
 })
-export class LocationPickPage {
+export class GMapComponent {
+
   map: GoogleMap;
   address:string;
   constructor(public navCtrl: NavController, public navParams: NavParams,
      private platform: Platform,public modalCtrl: ModalController,public viewCtrl: ViewController,
      public app: App,private _ngZone:NgZone) {
-      
+      this.platform.ready().then(()=>{
+        this.loadMap();
+      });
   }
 
   ionViewDidEnter(){
-    this.platform.ready().then(()=>{
-      //this.loadMap();
-    });
+    
   }
   ionViewDidLoad() {
     
@@ -73,32 +73,7 @@ export class LocationPickPage {
                 // Not found
                 return null;
               }
-              // let address: any = [
-              //   results[0].subThoroughfare || "",
-              //   results[0].thoroughfare || "",
-              //   results[0].locality || "",
-              //   results[0].adminArea || "",
-              //   results[0].postalCode || "",
-              //   results[0].country || ""].join(", ");
-
-                // console.log(results[0].locale);
-                // console.log(results[0].adminArea);
-                // console.log(results[0].country);
-                // console.log(results[0].countryCode);
-                // console.log(results[0].extra.featureName);
-                // console.log(results[0].extra.lines);
-                // console.log(results[0].extra.permises);
-                // console.log(results[0].extra.phone);
-                // console.log(results[0].locality);
-                // console.log(results[0].postalCode);
-                // console.log(results[0].subAdminArea);
-                // console.log(results[0].subLocality);
-                // console.log(results[0].subThoroughfare);
-                // console.log(results[0].thoroughfare);
-              //marker.setPosition(cameraPosition.target);
-              //marker.setTitle(address);
-              //marker.showInfoWindow();
-              //this.address=address;
+             
               this._ngZone.run(() => {
                 //this.address = results[0].extra.lines.join(',');
                 this.address = results[0].extra.lines[0].substr(results[0].extra.lines[0].indexOf(",")+2,results[0].extra.lines[0].length);
@@ -119,4 +94,5 @@ export class LocationPickPage {
   saveLocation(){
     this.viewCtrl.dismiss();
   }
+
 }
