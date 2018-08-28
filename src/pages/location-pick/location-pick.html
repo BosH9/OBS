@@ -1,28 +1,40 @@
-
-<!-- <ion-header transparent>
+<!-- 
+<ion-header transparent>
   <ion-navbar>
   </ion-navbar>
-  </ion-header>
-   -->
+  </ion-header> -->
+  
  
-<ion-content no-padding>
-            <g-map></g-map>
-  <ion-item>
+<ion-content no-padding style="padding-top:-20px;" scroll="false">
+            <g-map (change)="updateLocation($event)"></g-map>
+   <form name="frmUserAddress" [formGroup]="addressForm">
+     <ion-label no-padding padding-left padding-top class="text-bold">Set location details</ion-label>
+    <ion-item padding-top padding-right>
+      <ion-label stacked class="lbl-text">LOCATION</ion-label>
+      <ion-input name="location" type="text" formControlName="location" [readonly]="true"
+       placeholder="Identifying location..." max-length="500"></ion-input>
+    </ion-item>        
+    <ion-item padding-top padding-right>
+      <ion-label floating class="lbl-text">HOUSE/FLAT NO.</ion-label>
+      <ion-input type="text" (change)="validate()" formControlName="houseNo" max-length="50"></ion-input>
+    </ion-item> 
+    <ion-item padding-top padding-right>
+      <ion-label floating class="lbl-text">LANDMARK</ion-label>
+      <ion-input type="text" (change)="validate()" formControlName="landmark" max-length="50"></ion-input>
+    </ion-item>
+    <p padding>
+
+      <button class="btn-save" [disabled]="!addressForm.valid" (click)="saveLocation()" ion-button full >SAVE</button>
+    </p>
     
-    <ion-input type="text" [(ngModel)]="address" name="address"></ion-input> 
-  </ion-item>
-  <ion-item>
-      <button ion-button outline>ADD ADDRESS</button><button ion-button outline>TEST</button>
-  </ion-item>
- 
+   </form>        
+   <p>Form value: {{ addressForm.value | json }}</p>
   <!-- <div id="map_canvas"></div> -->
   <!--<div id="map_canvas" style="position: relative">
        <img src="assets/icon/icons8-marker-26.png" style="position: absolute; left:50%;top:50%;" /> 
       <img src="assets/icon/Marker-40-80-120px/icons8-marker-40-red.png" style="position: absolute; left:50%;top:50%;margin-left: -20px;margin-top: -39px" />
   </div>-->
 </ion-content>
-<ion-footer text-center>
-    <ion-toolbar>
-      <ion-title (click)="saveLocation()">SAVE</ion-title>
-    </ion-toolbar>
-  </ion-footer>
+<!-- <ion-footer text-center no-padding>
+  
+  </ion-footer> -->

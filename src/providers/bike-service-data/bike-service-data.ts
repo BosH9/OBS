@@ -36,5 +36,13 @@ export class BikeServiceDataProvider {
  getBookingServiceById(id){
   return this.http.get(this.apiAddress+'BOOKINGSERVICEs/'+id).map(res=>res);
  }
+ saveUserAddress(userAddress){
+  let headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Accept': 'text/javascript'
+  });
+  return this.http.post(this.apiAddress+'SaveUserAddress',userAddress,{headers})
+       .map(res=>res);
+ }
 
 }

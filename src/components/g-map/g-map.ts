@@ -1,5 +1,5 @@
-import { Component,NgZone } from '@angular/core';
-import { App, NavController, NavParams, Platform,ModalController, ViewController  } from 'ionic-angular';
+import { Component,NgZone,ViewChild, Output, EventEmitter } from '@angular/core';
+import { App, NavController, NavParams, Platform,ModalController, ViewController,Content  } from 'ionic-angular';
 
 import {
   LocationService,
@@ -23,6 +23,11 @@ export class GMapComponent {
 
   map: GoogleMap;
   address:string;
+  lngLat:any;
+
+  @Output() change: EventEmitter<string> = new EventEmitter<string>();
+
+  @ViewChild(Content) content: Content; 
   constructor(public navCtrl: NavController, public navParams: NavParams,
      private platform: Platform,public modalCtrl: ModalController,public viewCtrl: ViewController,
      public app: App,private _ngZone:NgZone) {
@@ -31,6 +36,9 @@ export class GMapComponent {
       });
   }
 
+  ionViewWillEnter() {
+    this.content.resize();
+  }
   ionViewDidEnter(){
     
   }
@@ -45,7 +53,7 @@ export class GMapComponent {
 
   loadMap() {
     LocationService.getMyLocation().then((myLocation: MyLocation) => {
-
+      this.lngLat=myLocation.latLng;
       let options: GoogleMapOptions = {
         camera: {
           target: myLocation.latLng,
@@ -54,6 +62,7 @@ export class GMapComponent {
         }
       };
       this.map = GoogleMaps.create('map_canvas', options);
+
       this.map.one(GoogleMapsEvent.MAP_READY).then(this.onMapReady.bind(this));
       let marker:Marker=this.map.addMarkerSync({
         title:myLocation.latLng.lat+' - '+myLocation.latLng.lng,
@@ -62,8 +71,13 @@ export class GMapComponent {
         visible:true
       });
           marker.showInfoWindow();
+
+          this.map.on(GoogleMapsEvent.CAMERA_MOVE_START).subscribe(()=>{
+            this.change.emit("");
+          });
       
           this.map.on(GoogleMapsEvent.CAMERA_MOVE_END).subscribe((params: any[]) => {
+            //this.change.emit("");
             let cameraPosition: CameraPosition<LatLng> = params[0];
             
             Geocoder.geocode({
@@ -77,8 +91,12 @@ export class GMapComponent {
               this._ngZone.run(() => {
                 //this.address = results[0].extra.lines.join(',');
                 this.address = results[0].extra.lines[0].substr(results[0].extra.lines[0].indexOf(",")+2,results[0].extra.lines[0].length);
+                this.change.emit(this.address);
           });
             });
+
+            
+
 
             //console.log(marker.getPosition().lat +"-"+marker.getPosition().lng);
             console.log(cameraPosition.target.lat+' - '+cameraPosition.target.lng);
@@ -88,8 +106,25 @@ export class GMapComponent {
           });
     });
   }
-  onMapReady() {
+  onMapReady(this) {
     console.log('map is ready!');
+    Geocoder.geocode({
+      "position": this.lngLat
+    }).then((results: GeocoderResult[]) => {
+      if (results.length == 0) {
+        // Not found
+        console.log('not found');
+        console.log(this.lngLat);
+        console.log(this.lngLat.lat + " - "+ this.lngLat.lng);
+        return null;
+      }
+     
+      this._ngZone.run(() => {
+        //this.address = results[0].extra.lines.join(',');
+        this.address = results[0].extra.lines[0].substr(results[0].extra.lines[0].indexOf(",")+2,results[0].extra.lines[0].length);
+        this.change.emit(this.address);
+  });
+    });
   }
   saveLocation(){
     this.viewCtrl.dismiss();

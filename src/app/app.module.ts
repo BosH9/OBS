@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http'; 
 import { NgModule, ErrorHandler, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
@@ -70,9 +71,10 @@ import { BookingService } from '../models/booking-service-model';
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     HttpModule,
     HttpClientModule,
-    IonicModule.forRoot(ConferenceApp, {tabsHideOnSubPages: true,}, {
+    IonicModule.forRoot(ConferenceApp, {tabsHideOnSubPages: true,scrollPadding: false,scrollAssist: true, autoFocusAssist: false}, {
       links: [
         { component: TabsPage, name: 'TabsPage', segment: 'tabs-page' },
         { component: SchedulePage, name: 'Schedule', segment: 'schedule' },

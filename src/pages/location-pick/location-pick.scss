@@ -1,6 +1,18 @@
 page-location-pick {
-    #map_canvas {
-        height: 100% !important;
-      }
+    // #map_canvas {
+    //     height: 100% !important;
+    //   }
       ion-header[transparent] .toolbar-background { background: transparent;}
+
+    //   ion-scroll {
+    //     white-space: nowrap;
+    //     height: 100px;
+    // }
+    .lbl-text{
+      font-size: 10px !important;
+    }
+
+    .btn-save{
+      height: 50px;
+    }
 }
