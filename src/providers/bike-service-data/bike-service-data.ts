@@ -1,6 +1,8 @@
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+import { environment } from '../../environments/environment';
+
 /*
   Generated class for the BikeServiceDataProvider provider.
 
@@ -9,8 +11,9 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class BikeServiceDataProvider {
+  apiAddress:string=`${environment.apiUrl}`;
   //apiAddress:string='http://127.0.0.1:55555/api/';
-  apiAddress:string='http://obstest-001-site1.itempurl.com/api/';
+  //apiAddress:string='http://obstest-001-site1.itempurl.com/api/';
   constructor(public http: HttpClient) {
     console.log('Hello BikeServiceDataProvider Provider');
   }
@@ -18,7 +21,8 @@ export class BikeServiceDataProvider {
     
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Accept': 'text/javascript'
+      'Accept': 'text/javascript',
+      'Access-Control-Allow-Origin':'http://191.168.0.108:8100'
     });
     let bikeob=JSON.stringify(bike);
    return this.http.post(this.apiAddress+'BOOKINGSERVICEs',bikeob,{headers})
@@ -26,7 +30,12 @@ export class BikeServiceDataProvider {
  }
 
  getBookings(userId){
-  return this.http.get(this.apiAddress+'GetBOOKINGSERVICEByUserId/'+userId)
+  let headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Accept': 'text/javascript',
+    'Access-Control-Allow-Origin':'http://191.168.0.108:8100'
+  });
+  return this.http.get(this.apiAddress+'GetBOOKINGSERVICEByUserId/'+userId,{headers})
   .map(res=>res);
  }
  getBookingDetails(id){
@@ -36,12 +45,13 @@ export class BikeServiceDataProvider {
  getBookingServiceById(id){
   return this.http.get(this.apiAddress+'BOOKINGSERVICEs/'+id).map(res=>res);
  }
- saveUserAddress(userAddress){
+ saveUserAddress(uSERADDRESS){
   let headers = new HttpHeaders({
     'Content-Type': 'application/json',
-    'Accept': 'text/javascript'
+    'Accept': 'text/javascript',
+    'Access-Control-Allow-Origin':'*'
   });
-  return this.http.post(this.apiAddress+'SaveUserAddress',userAddress,{headers})
+  return this.http.post(this.apiAddress+'USERADDRESSes',uSERADDRESS,{headers})
        .map(res=>res);
  }
 

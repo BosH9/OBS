@@ -25,7 +25,7 @@ export class GMapComponent {
   address:string;
   lngLat:any;
 
-  @Output() change: EventEmitter<string> = new EventEmitter<string>();
+  @Output() change: EventEmitter<object> = new EventEmitter<object>();
 
   @ViewChild(Content) content: Content; 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -73,11 +73,11 @@ export class GMapComponent {
           marker.showInfoWindow();
 
           this.map.on(GoogleMapsEvent.CAMERA_MOVE_START).subscribe(()=>{
-            this.change.emit("");
+            this.change.emit({address:"",latLng:""});
           });
       
           this.map.on(GoogleMapsEvent.CAMERA_MOVE_END).subscribe((params: any[]) => {
-            //this.change.emit("");
+            //this.change.emit({address:"",latLng:""});
             let cameraPosition: CameraPosition<LatLng> = params[0];
             
             Geocoder.geocode({
@@ -85,13 +85,14 @@ export class GMapComponent {
             }).then((results: GeocoderResult[]) => {
               if (results.length == 0) {
                 // Not found
+                console.log('not found');
                 return null;
               }
              
               this._ngZone.run(() => {
                 //this.address = results[0].extra.lines.join(',');
                 this.address = results[0].extra.lines[0].substr(results[0].extra.lines[0].indexOf(",")+2,results[0].extra.lines[0].length);
-                this.change.emit(this.address);
+                this.change.emit({address:this.address,latLng:cameraPosition.target.lat+','+cameraPosition.target.lng});
           });
             });
 
@@ -122,7 +123,7 @@ export class GMapComponent {
       this._ngZone.run(() => {
         //this.address = results[0].extra.lines.join(',');
         this.address = results[0].extra.lines[0].substr(results[0].extra.lines[0].indexOf(",")+2,results[0].extra.lines[0].length);
-        this.change.emit(this.address);
+        this.change.emit({address:this.address,latLng: results[0].position.lat+','+results[0].position.lng});
   });
     });
   }

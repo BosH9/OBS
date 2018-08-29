@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { BikeServiceDataProvider } from '../../providers/bike-service-data/bike-service-data';
 
+import { USERADDRESS } from '../../models/user-addess';
+
 @IonicPage()
 @Component({
   selector: 'page-location-pick',
@@ -12,15 +14,15 @@ import { BikeServiceDataProvider } from '../../providers/bike-service-data/bike-
 })
 export class LocationPickPage {
   address:string;
-  userAddess:any = {};
+  latLng:string;
 
   addressForm:FormGroup;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
      private platform: Platform,public modalCtrl: ModalController,public viewCtrl: ViewController,
-     public app: App, public fb:FormBuilder, public service:BikeServiceDataProvider) {
-      this.userAddess={};
-
+     public app: App, public fb:FormBuilder, public service:BikeServiceDataProvider,
+     public userAddess:USERADDRESS) {
+      
       this.addressForm = this.fb.group({
         location: ['',Validators.required],
         addressType: ['other', Validators.required],
@@ -53,16 +55,28 @@ export class LocationPickPage {
     console.log('map is ready!');
   }
   saveLocation(){
-    this.service.saveUserAddress(this.addressForm.value)
-                .subscribe((res)=>{
-                  console.log(res);
-                  this.viewCtrl.dismiss();
-                });
+    if(this.addressForm.valid){
+      this.userAddess.ADDRESS=this.addressForm.get('location').value;
+      this.userAddess.ADDRESSTYPE=this.addressForm.get('addressType').value;
+      this.userAddess.HOUSENUMBER=this.addressForm.get('houseNo').value;
+      this.userAddess.LANDMARK=this.addressForm.get('landmark').value;
+      this.userAddess.LATLNG=this.latLng;
+      this.userAddess.STATUS="Y";
+      this.userAddess.TIMESTAMP=new Date();
+      this.userAddess.USERID=1;
+      this.service.saveUserAddress(this.userAddess)
+                  .subscribe((res)=>{
+                    console.log(res);
+                    this.viewCtrl.dismiss();
+                  });
+      
+    }
     
   }
   updateLocation($event){
-    this.address=$event;
-    this.addressForm.patchValue({location:$event});
+    this.address=$event.address;
+    this.latLng=$event.latLng;
+    this.addressForm.patchValue({location:$event.address});
   }
   validate(){
   }

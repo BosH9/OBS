@@ -43,6 +43,7 @@ import { BikeServiceDataProvider } from '../providers/bike-service-data/bike-ser
 
 
 import { BookingService } from '../models/booking-service-model';
+import { USERADDRESS } from '../models/user-addess';
 
 @NgModule({
   declarations: [
@@ -132,7 +133,8 @@ import { BookingService } from '../models/booking-service-model';
     HttpModule,
     HttpClientModule,
     BikeServiceDataProvider,
-    BookingService
+    BookingService,
+    USERADDRESS
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
