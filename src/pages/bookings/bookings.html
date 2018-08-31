@@ -46,7 +46,7 @@
           </ion-col>
           <ion-col center text-right class="pr-2">
             <ion-note>
-              {{booking?.PICKUPTIME }}
+              {{booking?.PICKUPTIME | date:'MMM d, y, h:mm a' }}
             </ion-note>
           </ion-col>
         </ion-row>

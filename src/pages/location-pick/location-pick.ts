@@ -17,7 +17,7 @@ export class LocationPickPage {
   latLng:string;
 
   addressForm:FormGroup;
-
+  validation:string;
   constructor(public navCtrl: NavController, public navParams: NavParams,
      private platform: Platform,public modalCtrl: ModalController,public viewCtrl: ViewController,
      public app: App, public fb:FormBuilder, public service:BikeServiceDataProvider,
@@ -72,6 +72,7 @@ export class LocationPickPage {
       
     }
     
+    
   }
   updateLocation($event){
     this.address=$event.address;
@@ -79,5 +80,13 @@ export class LocationPickPage {
     this.addressForm.patchValue({location:$event.address});
   }
   validate(){
+    if(!this.addressForm.get('location').value){
+      this.validation="ENTER LOCATION";
+    } else if(!this.addressForm.get('houseNo').value){
+      this.validation="ENTER HOUSE / FLAT NO.";
+    } else if(!this.addressForm.get('landmark').value){
+      this.validation="ENTER LANDMARK";
+    }else 
+    this.validation="";
   }
 }

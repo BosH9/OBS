@@ -15,20 +15,24 @@
        placeholder="Identifying location..." max-length="500"></ion-input>
     </ion-item>        
     <ion-item padding-top padding-right>
-      <ion-label floating class="lbl-text">HOUSE/FLAT NO.</ion-label>
-      <ion-input type="text" (change)="validate()" formControlName="houseNo" max-length="50"></ion-input>
+      <ion-label floating class="lbl-text">HOUSE / FLAT NO.</ion-label>
+      <ion-input type="text" (ionChange)="validate()" formControlName="houseNo" max-length="50"></ion-input>
     </ion-item> 
     <ion-item padding-top padding-right>
       <ion-label floating class="lbl-text">LANDMARK</ion-label>
-      <ion-input type="text" (change)="validate()" formControlName="landmark" max-length="50"></ion-input>
+      <ion-input type="text" (ionChange)="validate()" formControlName="landmark" max-length="50"></ion-input>
     </ion-item>
+      <ion-label class="lbl-text" padding-left padding-top>Save as</ion-label>
+      <button ion-button small no-border border-bottom outline>
+        <ion-icon name="locate"></ion-icon>
+        Other
+      </button>
     <p padding>
 
-      <button class="btn-save" [disabled]="!addressForm.valid" (click)="saveLocation()" ion-button full >SAVE</button>
+      <button class="btn-save" [disabled]="!addressForm.valid" (click)="saveLocation()" ion-button full >{{validation||'SAVE'}}</button>
     </p>
     
    </form>        
-   <p>Form value: {{ addressForm.value | json }}</p>
   <!-- <div id="map_canvas"></div> -->
   <!--<div id="map_canvas" style="position: relative">
        <img src="assets/icon/icons8-marker-26.png" style="position: absolute; left:50%;top:50%;" /> 
