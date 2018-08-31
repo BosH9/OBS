@@ -13,8 +13,29 @@ page-location-pick {
       text-transform:uppercase;
       color: #999;
     }
-
+    // .lbl-text.active{
+    //   // border-bottom: 1px solid #FC8019;
+    // }
     .btn-save{
       height: 50px;
     }
+    .type{
+      width:33.33%;
+     
+    }
+    .type.active{
+      &:before {
+        content : "";
+        position: absolute;
+        left    : 0;
+        top  : 4px;
+        height  : 1px;
+        width   : 80%;  /* percentage of the element width*/
+        border-bottom:1px solid #FC8019;
+        margin-top:1.6em; /*move the border below the text*/
+      }
+    }
+    .type .button-inner{
+      justify-content:flex-start;
+  }
 }

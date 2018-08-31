@@ -23,10 +23,24 @@
       <ion-input type="text" (ionChange)="validate()" formControlName="landmark" max-length="50"></ion-input>
     </ion-item>
       <ion-label class="lbl-text" padding-left padding-top>Save as</ion-label>
-      <button ion-button small no-border border-bottom outline>
-        <ion-icon name="locate"></ion-icon>
-        Other
-      </button>
+      <ion-item no-lines>
+        <!-- <ion-label class="lbl-text">Home</ion-label>
+        <ion-label class="lbl-text">WORK</ion-label>
+        <ion-label class="lbl-text active">Other</ion-label> -->
+        <button ion-button clear icon-start class="type active" text-left>
+          <ion-icon name='home' is-active="true"></ion-icon>
+          Home
+        </button>
+        <button ion-button clear icon-start class="type">
+          <ion-icon name='briefcase' is-active="true"></ion-icon>
+          Work
+        </button>
+        <button ion-button clear icon-start class="type">
+          <ion-icon name='locate' is-active="true"></ion-icon>
+          Other
+        </button>
+      </ion-item>
+      
     <p padding>
 
       <button class="btn-save" [disabled]="!addressForm.valid" (click)="saveLocation()" ion-button full >{{validation||'SAVE'}}</button>
