@@ -44,6 +44,7 @@ import { BikeServiceDataProvider } from '../providers/bike-service-data/bike-ser
 
 import { BookingService } from '../models/booking-service-model';
 import { USERADDRESS } from '../models/user-addess';
+import { FindDistanceProvider } from '../providers/find-distance/find-distance';
 
 @NgModule({
   declarations: [
@@ -134,7 +135,8 @@ import { USERADDRESS } from '../models/user-addess';
     HttpClientModule,
     BikeServiceDataProvider,
     BookingService,
-    USERADDRESS
+    USERADDRESS,
+    FindDistanceProvider
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

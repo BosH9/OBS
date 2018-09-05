@@ -38,4 +38,11 @@ page-location-pick {
     .type .button-inner{
       justify-content:flex-start;
   }
+
+  .saveas-btn-group button{
+    padding-left: 0 !important;
+  }
+  .saveas-btn-group ion-label{
+    margin-top: 0 !important;
+  }
 }

@@ -12,7 +12,8 @@ import {
   CameraPosition,
   LatLng,
   Geocoder,
-  GeocoderResult
+  GeocoderResult,
+  Spherical
 } from '@ionic-native/google-maps';
 
 @Component({
@@ -24,6 +25,7 @@ export class GMapComponent {
   map: GoogleMap;
   address:string;
   lngLat:any;
+  myPosition:any;
 
   @Output() change: EventEmitter<object> = new EventEmitter<object>();
 
@@ -68,7 +70,7 @@ export class GMapComponent {
         title:myLocation.latLng.lat+' - '+myLocation.latLng.lng,
         position:myLocation.latLng,
         animation:'drop',
-        visible:true
+        visible:false
       });
           marker.showInfoWindow();
 
@@ -90,7 +92,12 @@ export class GMapComponent {
               }
              
               this._ngZone.run(() => {
-                //this.address = results[0].extra.lines.join(',');
+                console.log(results[0].extra.lines.toString());
+                console.log("Distance: "+Spherical.computeDistanceBetween(this.myPosition, cameraPosition.target));
+                let xx=results[0].extra.lines[0].split(',');
+                let place=xx.length==9?xx[5]:xx.length==8?xx[4]: xx.length==7?xx[3]:xx.length==6?xx[2]:xx.length==5?xx[1]:xx[0];
+                console.log(place);
+                
                 this.address = results[0].extra.lines[0].substr(results[0].extra.lines[0].indexOf(",")+2,results[0].extra.lines[0].length);
                 this.change.emit({address:this.address,latLng:cameraPosition.target.lat+','+cameraPosition.target.lng});
           });
@@ -122,6 +129,7 @@ export class GMapComponent {
      
       this._ngZone.run(() => {
         //this.address = results[0].extra.lines.join(',');
+        this.myPosition=this.lngLat;
         this.address = results[0].extra.lines[0].substr(results[0].extra.lines[0].indexOf(",")+2,results[0].extra.lines[0].length);
         this.change.emit({address:this.address,latLng: results[0].position.lat+','+results[0].position.lng});
   });

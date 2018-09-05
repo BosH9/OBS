@@ -4,8 +4,14 @@ import { App, IonicPage, NavController, NavParams, Platform,ModalController,
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { BikeServiceDataProvider } from '../../providers/bike-service-data/bike-service-data';
+import { FindDistanceProvider } from '../../providers/find-distance/find-distance';
 
 import { USERADDRESS } from '../../models/user-addess';
+
+import{ ILatLng, Spherical, LatLng } from '@ionic-native/google-maps';
+
+
+
 
 @IonicPage()
 @Component({
@@ -18,10 +24,17 @@ export class LocationPickPage {
 
   addressForm:FormGroup;
   validation:string;
+
+  workClass:boolean=false;
+  homeClass:boolean=false;
+  otherClass:boolean=false;
+  
+  userAddesses:any;
+  distances:any=[];
   constructor(public navCtrl: NavController, public navParams: NavParams,
      private platform: Platform,public modalCtrl: ModalController,public viewCtrl: ViewController,
      public app: App, public fb:FormBuilder, public service:BikeServiceDataProvider,
-     public userAddess:USERADDRESS) {
+     public userAddess:USERADDRESS, public fd:FindDistanceProvider) {
       
       this.addressForm = this.fb.group({
         location: ['',Validators.required],
@@ -29,8 +42,32 @@ export class LocationPickPage {
         houseNo: ['', Validators.required],
         landmark: ['', Validators.required]
       });
-      console.log(this.addressForm.value);
+      this.homeClass=false;
+    this.workClass=false;
+    this.otherClass=true;
       
+    
+      
+    this.fd.getUserAddressByUserId(1).subscribe(x=>{
+      this.userAddesses = x;
+      this.userAddesses.forEach(element => {
+        let source:ILatLng=new LatLng(0,0);
+        let dest:ILatLng=new LatLng(0,0);
+        if(element.LATLNG){
+          let temp=element.LATLNG.split(',');
+          source.lat=17.367821;
+          source.lng=78.54011539999999;
+
+          dest.lat= +temp[0];
+          dest.lng= +temp[1];
+          this.distances.push({'source':source,'dest':dest,'Distance':(Spherical.computeDistanceBetween(source, dest)*0.001)})
+        }
+      });
+      console.log(JSON.stringify(this.distances));
+    });
+   
+    
+
   }
 
   ionViewDidEnter(){
@@ -78,6 +115,7 @@ export class LocationPickPage {
     this.address=$event.address;
     this.latLng=$event.latLng;
     this.addressForm.patchValue({location:$event.address});
+    this.validate();
   }
   validate(){
     if(!this.addressForm.get('location').value){
@@ -88,5 +126,13 @@ export class LocationPickPage {
       this.validation="ENTER LANDMARK";
     }else 
     this.validation="";
+  }
+ 
+  saveAsLoc(home:boolean,work:boolean,other:boolean){
+    this.homeClass=home;
+    this.workClass=work;
+    this.otherClass=other;
+    let addType=home?'home':work?'work':'other';
+    this.addressForm.patchValue({addressType:addType});
   }
 }

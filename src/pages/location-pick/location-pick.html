@@ -22,20 +22,31 @@
       <ion-label floating class="lbl-text">LANDMARK</ion-label>
       <ion-input type="text" (ionChange)="validate()" formControlName="landmark" max-length="50"></ion-input>
     </ion-item>
-      <ion-label class="lbl-text" padding-left padding-top>Save as</ion-label>
-      <ion-item no-lines>
+      <ion-label class="lbl-text" no-padding  padding-left padding-top>Save as</ion-label>
+      <ion-item no-lines no-padding padding-left padding-right class="saveas-btn-group">
         <!-- <ion-label class="lbl-text">Home</ion-label>
         <ion-label class="lbl-text">WORK</ion-label>
         <ion-label class="lbl-text active">Other</ion-label> -->
-        <button ion-button clear icon-start class="type active" text-left>
+        <button ion-button clear icon-start class="type active"
+          [ngClass]="{
+            'type':true,
+            'active':homeClass==true
+          }"
+          text-left no-margin margin-bottom (click)="saveAsLoc(true,false,false)">
           <ion-icon name='home' is-active="true"></ion-icon>
           Home
         </button>
-        <button ion-button clear icon-start class="type">
+        <button ion-button clear icon-start [ngClass]="{
+          'type':true,
+          'active':workClass==true
+        }" text-left no-margin margin-bottom (click)="saveAsLoc(false,true,false)">
           <ion-icon name='briefcase' is-active="true"></ion-icon>
           Work
         </button>
-        <button ion-button clear icon-start class="type">
+        <button ion-button clear icon-start [ngClass]="{
+          'type':true,
+          'active':otherClass==true
+        }" text-left no-margin margin-bottom (click)="saveAsLoc(false,false,true)">
           <ion-icon name='locate' is-active="true"></ion-icon>
           Other
         </button>
