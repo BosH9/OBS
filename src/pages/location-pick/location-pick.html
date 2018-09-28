@@ -23,10 +23,8 @@
       <ion-input type="text" (ionChange)="validate()" formControlName="landmark" max-length="50"></ion-input>
     </ion-item>
       <ion-label class="lbl-text" no-padding  padding-left padding-top>Save as</ion-label>
-      <ion-item no-lines no-padding padding-left padding-right class="saveas-btn-group">
-        <!-- <ion-label class="lbl-text">Home</ion-label>
-        <ion-label class="lbl-text">WORK</ion-label>
-        <ion-label class="lbl-text active">Other</ion-label> -->
+      <!-- <ion-item no-lines no-padding padding-left padding-right class="saveas-btn-group">
+        
         <button ion-button clear icon-start class="type active"
           [ngClass]="{
             'type':true,
@@ -39,19 +37,47 @@
         <button ion-button clear icon-start [ngClass]="{
           'type':true,
           'active':workClass==true
-        }" text-left no-margin margin-bottom (click)="saveAsLoc(false,true,false)">
+        }" no-margin margin-bottom (click)="saveAsLoc(false,true,false)">
           <ion-icon name='briefcase' is-active="true"></ion-icon>
           Work
         </button>
         <button ion-button clear icon-start [ngClass]="{
           'type':true,
           'active':otherClass==true
-        }" text-left no-margin margin-bottom (click)="saveAsLoc(false,false,true)">
+        }" text-right no-margin margin-bottom (click)="saveAsLoc(false,false,true)">
           <ion-icon name='locate' is-active="true"></ion-icon>
           Other
         </button>
-      </ion-item>
-      
+      </ion-item> -->
+      <ion-grid no-padding padding-left padding-right>
+        <ion-row>
+          <ion-col col-4 class="loc-cat-col">
+            <span [ngClass]="{
+              'type':true,
+              'active':homeClass==true
+            }"  (click)="saveAsLoc(true,false,false)"><ion-icon name='home' is-active="true"></ion-icon>
+          Home</span>
+          </ion-col>
+          <ion-col col-4 text-center class="loc-cat-col">
+            <span [ngClass]="{
+              'type':true,
+              'active':workClass==true
+            }"  (click)="saveAsLoc(false,true,false)">
+            <ion-icon name='briefcase' is-active="true"></ion-icon>
+          Work
+          </span>
+          </ion-col>
+          <ion-col col-4 text-right class="loc-cat-col">
+              <span [ngClass]="{
+                'type':true,
+                'active':otherClass==true
+              }"  (click)="saveAsLoc(false,false,true)">
+            <ion-icon name='locate' is-active="true"></ion-icon>
+          Other
+          </span>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     <p padding>
 
       <button class="btn-save" [disabled]="!addressForm.valid" (click)="saveLocation()" ion-button full >{{validation||'SAVE'}}</button>

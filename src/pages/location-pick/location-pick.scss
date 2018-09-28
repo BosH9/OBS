@@ -21,18 +21,26 @@ page-location-pick {
     }
     .type{
       width:33.33%;
-     
+      &:before {
+        content : "";
+        position: absolute;
+        
+        height  : 1px;
+        width   : 49%;  /* percentage of the element width*/
+        border-bottom:2px solid #dddddd;
+        margin-top:1.3em; /*move the border below the text*/
+      }
     }
+
     .type.active{
       &:before {
         content : "";
         position: absolute;
-        left    : 0;
-        top  : 4px;
+        
         height  : 1px;
-        width   : 80%;  /* percentage of the element width*/
-        border-bottom:1px solid #FC8019;
-        margin-top:1.6em; /*move the border below the text*/
+        width   : 49%;  /* percentage of the element width*/
+        border-bottom:2px solid #FC8019;
+        margin-top:1.3em; /*move the border below the text*/
       }
     }
     .type .button-inner{
@@ -44,5 +52,29 @@ page-location-pick {
   }
   .saveas-btn-group ion-label{
     margin-top: 0 !important;
+  }
+  .underline{
+    text-decoration: underline;
+    
+  }
+  i[class^="icon-"]:before {
+    display: inline-block;
+    text-decoration: underline;
+  }
+
+  span.loc-cat{
+    &:before {
+      content : "";
+      position: absolute;
+      left    : 0;
+      top  : 4px;
+      height  : 1px;
+      width   : 60%;  /* percentage of the element width*/
+      border-bottom:2px solid #FC8019;
+      margin-top:1.6em; /*move the border below the text*/
+    }
+  }
+  .loc-cat-col{
+    padding-left: 0 !important;
   }
 }

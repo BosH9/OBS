@@ -1,4 +1,4 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ILatLng } from '@ionic-native/google-maps';
 import { LoadingController} from 'ionic-angular';
 //import { Spherical } from '@ionic-native/google-maps';

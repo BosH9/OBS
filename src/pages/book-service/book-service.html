@@ -6,17 +6,22 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>BosH Bike Service</ion-title>
+  <ion-navbar color="white">
+      <button ion-button menuToggle color="brand">
+          <ion-icon name="menu"></ion-icon>
+        </button>
+    <ion-title class="logo-title" ><span style="width: 100%;">BosH</span><span style="width: 100%;font-size: 8px;color:#294859;position: absolute;top:19px;left:1px;">BIKE SERVICE</span></ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <button ion-button block (click)="openModal()">
-    {{bike?.BIKENUMBER||'SELECT BIKE'}}
-  </button>
+  
+  <ion-card class="card" (click)="openModal()" >
+      <!-- <img src="assets/user-bike-img/motor-bike-svg-icon.svg" height="100px"/> -->
+      <div class="card-title">{{bike?.BIKENUMBER||'SELECT BIKE'}}</div>
+    </ion-card>
   <ion-item>
     <ion-label>Date</ion-label>
     <ion-datetime displayFormat="MM/DD/YYYY HH:mm" [(ngModel)]="myDate"></ion-datetime>
@@ -25,8 +30,9 @@
       <ion-label>Pickup Location</ion-label>
     </ion-item>
 </ion-content>
-<ion-footer text-center>
-  <ion-toolbar>
+<ion-footer text-center class="book-now" (click)="bookNow()">
+  <!-- <ion-toolbar>
     <ion-title (click)="bookNow()">BOOK NOW</ion-title>
-  </ion-toolbar>
+  </ion-toolbar> -->
+  <label>BOOK NOW</label>
 </ion-footer>

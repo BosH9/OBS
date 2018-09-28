@@ -33,19 +33,39 @@ $headings-font-weight: 300;
 // colors so you can add, rename and remove colors as needed.
 // The "primary" color is the only required color in the map.
 
+// $colors: (
+//   primary:    #488aff,
+//   secondary:  #32db64,
+//   danger:     #f53d3d,
+//   light:      #f4f4f4,
+//   dark:       #222,
+//   favorite:   #69BB7B,
+//   twitter:    #1da1f4,
+//   google:     #dc4a38,
+//   vimeo:      #23b6ea,
+//   facebook:   #3b5998,
+//   progress-status:#396,
+
+// );
+
 $colors: (
-  primary:    #488aff,
-  secondary:  #32db64,
+  
+  primary:    #0A9BE9,
+  secondary:  #61727D,
+  white:#FFFFFF,
+  link:#0A9BE9,
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #222,
+
   favorite:   #69BB7B,
   twitter:    #1da1f4,
   google:     #dc4a38,
   vimeo:      #23b6ea,
   facebook:   #3b5998,
   progress-status:#396,
-
+  brand:#FA4900,
+  brand-primary:#294859
 );
 
 
